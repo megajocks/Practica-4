@@ -1,0 +1,153 @@
+import java.util.Scanner;
+public class codigo1 {
+
+	public static double simpsonSimple(double limiteA,double limiteB,double intervalo0)
+	{
+		return ((limiteB-limiteA)/intervalo0*(func((float) limiteA)+4*func1((float) ((limiteA+limiteB)/2))+func((float) limiteB)));
+	}
+
+	
+	 static float func(float x)
+    {
+        return (float)Math.log(x);
+    }
+ 
+    static float simpsons13(float limite1, float limite2, float intervalo1)
+    {
+        
+        float h = (limite2 - limite1) / intervalo1;
+ 
+       
+        float[] x = new float[10];
+        float[] fx= new float[10];
+ 
+        
+        for (int i = 0; i <= intervalo1; i++) {
+            x[i] = limite1 + i * h;
+            fx[i] = func(x[i]);
+        }
+ 
+       
+        float res = 0;
+        for (int i = 0; i <= intervalo1; i++) {
+            if (i == 0 || i == intervalo1)
+                res += fx[i];
+            else if (i % 2 != 0)
+                res += 4 * fx[i];
+            else
+                res += 2 * fx[i];
+        }
+         
+        res = res * (h / 3);
+        return res;
+    }
+
+
+	 
+    static float func1( float y)
+    {
+        return (1 / ( 1 + y * y ));
+    }
+      
+    static float simpsons38 (float limite3, float limite4, float intervalo2 )
+    {
+        float value;
+        float interval_size = (limite3 - limite4) / intervalo2;
+ 
+        float sum = func(limite4) + func1(limite3);
+      
+        for (int i = 1 ; i < intervalo2 ; i++)
+        {
+            if (i % 3 == 0)
+                sum = sum + 2 * func1(limite4 + i * interval_size);
+            else
+                sum = sum + 3 * func1(limite4 + i * interval_size);
+        }
+        return ( 3 * interval_size / 8 ) * sum ;
+    }
+
+	public static void main(String[] args) {
+		
+
+		         Scanner ObjLeer=new Scanner(System.in);
+
+       int opcion=0;
+       int opcion2=0;
+      
+        
+
+    	
+    	  System.out.printf("Bienvenido a la utp\n");
+    	  System.out.printf("Metodos numericos\n");
+    	  System.out.printf("Alumno 1: Camilo Jose Reigosa./ 4-815-1331\n");
+    	  System.out.printf("Profesor:  Andy Gomez     \n");
+
+
+
+
+
+    	    	  while (opcion != 7) {
+    		  
+    		   System.out.printf("\n-----------------------------------------");
+System.out.printf("-----Programa------------------------------");
+System.out.printf("\n1.Modelo de regresion");
+System.out.printf("\n2.Simpson");
+System.out.printf("\n");
+opcion=ObjLeer.nextInt();
+
+
+switch (opcion) {
+
+case 1:
+   
+    break;
+case 2:
+	System.out.printf("\n1.Simpson simple");
+	System.out.printf("\n2.Simpson 1/3");
+	System.out.printf("\n3.Simpson 3/8");
+	System.out.printf("\n");
+	opcion2=ObjLeer.nextInt();
+
+	switch(opcion2)
+	{
+	case 1:
+		System.out.printf("\nLimite superior:   ");
+		double limiteA = ObjLeer.nextDouble();
+		System.out.printf("\nLimite inferior:    ");
+		double limiteB = ObjLeer.nextDouble();
+		System.out.printf("\nn:    ");
+		double intervalo0 = ObjLeer.nextDouble();
+		
+		System.out.println(simpsonSimple(limiteA,limiteB,intervalo0));
+		break;
+	case 2:
+		System.out.printf("\nLimite superior:   ");
+		float limite1 = ObjLeer.nextFloat();
+		System.out.printf("\nLimite inferior:    ");
+		float limite2 = ObjLeer.nextFloat();
+		System.out.printf("\nn:    ");
+		float intervalo1 = ObjLeer.nextFloat();
+
+		    System.out.println(simpsons13(limite1,limite2,intervalo1));
+		break;
+	case 3:
+			System.out.printf("\nLimite superior:   ");
+			float limite3 = ObjLeer.nextFloat();
+		System.out.printf("\nLimite inferior:    ");
+		float limite4 = ObjLeer.nextFloat();
+		System.out.printf("\nn:    ");
+		float intervalo2 = ObjLeer.nextFloat();
+
+		System.out.println(simpsons38(limite3,limite4,intervalo2));
+
+		break;
+	}
+
+	break;
+}
+    	  }
+    	      
+
+	}
+
+}
